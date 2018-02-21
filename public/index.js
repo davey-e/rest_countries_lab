@@ -2,11 +2,6 @@ let url;
 
 const app = function(){
     url = "https://restcountries.eu/rest/v2/all";
-    const getButton = document.getElementById('get-button');
-    getButton.addEventListener('click', handleGetButtonClick);
-}
-
-const handleGetButtonClick = function(){
     makeRequest(url, requestComplete);
 }
 
@@ -25,12 +20,13 @@ const requestComplete = function(){
 }
 
 const populateList = function(countries){
-    const ul = document.getElementById("country-list");
+    const select = document.getElementById("countries-drop-down");
     countries.forEach(function(country){
-        const li = document.createElement("li");
-        li.innerText = country.name;
-        ul.appendChild(li);
+        const option = document.createElement("option");
+        option.innerText = country.name;
+        select.appendChild(option);
     });
+
 }
 
 document.addEventListener('DOMContentLoaded', app);
