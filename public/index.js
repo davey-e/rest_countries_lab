@@ -5,7 +5,9 @@ let ul;
 const app = function(){
     url = "https://restcountries.eu/rest/v2/all";
     const countryObject = getCountryFromLocalStorage();
-    createCountryDetailList(countryObject);
+    if(countryObject !== null){
+        createCountryDetailList(countryObject);
+    }
     makeRequest(url, requestComplete);
     displayCountryDetails();
 }
