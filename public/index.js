@@ -4,6 +4,8 @@ let ul;
 
 const app = function(){
     url = "https://restcountries.eu/rest/v2/all";
+    const countryObject = getCountryFromLocalStorage();
+    createCountryDetailList(countryObject);
     makeRequest(url, requestComplete);
     displayCountryDetails();
 }
@@ -48,7 +50,24 @@ const handleDropDownChange = function(){
         };
         return accumulator;  // the country object
     })
+
+    createCountryDetailList(countryDetails);
+    saveCountryToLocalStorage(countryDetails);
     
+}
+
+const saveCountryToLocalStorage = function (countryDetails) {
+    const jsonCountryDetails = JSON.stringify(countryDetails);
+    localStorage.setItem("country", jsonCountryDetails)
+}
+
+const getCountryFromLocalStorage = function () {
+    const countryObject = JSON.parse(localStorage.getItem("country"));
+    return countryObject;
+}
+
+const createCountryDetailList = function (countryDetails) {
+    ul = document.getElementById("country-details");
     const liName = document.createElement('li');
     liName.innerText = "Country Name: " + countryDetails.name;
     ul.appendChild(liName);
